@@ -7,7 +7,7 @@ from sklearn.preprocessing import MultiLabelBinarizer
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.pipeline import Pipeline
-from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import LogisticRegression
 from sklearn.svm import LinearSVC
 
 def get_inputs(num):
@@ -37,7 +37,7 @@ def top_10_elements_helper(array):
     ind = np.argpartition(array, -10)[-10:]
     return ind[np.argsort(array[ind])]
 
-my_OvR = OneVsRestClassifier(SGDClassifier(loss="log", penalty='l2', alpha=1e-3, n_iter=5, random_state=42), n_jobs=-1)
+my_OvR = OneVsRestClassifier(LogisticRegression(), n_jobs=-1)
 my_Pipeline = Pipeline([('vect', count_vect),
                      #('tfidf', tfidf_transformer),
                      ('clf', my_OvR),
