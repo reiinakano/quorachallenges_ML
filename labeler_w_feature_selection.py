@@ -40,8 +40,8 @@ def top_10_elements_helper(array):
     return ind[np.argsort(array[ind])]
 
 my_Pipeline = Pipeline([('tfidf', tfidf_transformer),
-                     ('select', SelectKBest(chi2, k=1000)),
-                        ('clf',LogisticRegression(C=4, class_weight='balanced')),
+                     ('select', SelectKBest(chi2, k=1500)),
+                        ('clf',LogisticRegression(C=4, class_weight='auto')),
 ])
 my_OvR = OneVsRestClassifier(my_Pipeline, n_jobs=-1)
 fitted_Pipeline = my_OvR.fit(count_vect.fit_transform(questions), topics)
