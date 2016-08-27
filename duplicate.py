@@ -49,7 +49,7 @@ for question in raw_question_data:
                                            }
 raw_question_data = None
 
-tfidf_vector = TfidfVectorizer()
+tfidf_vector = CountVectorizer()
 tfidf_vector.fit([value["question_text"] for value in question_dictionary.itervalues()])
 
 def convert(question_key_pairs, vector):
@@ -77,7 +77,7 @@ def convert(question_key_pairs, vector):
 training_data = convert(training_pairs, tfidf_vector)
 to_predict = convert(testing_data, tfidf_vector)
 
-clf = LogisticRegression(C=0.0001, dual=True)
+clf = LogisticRegression(C=100)
 clf = clf.fit(training_data, training_labels)
 answers = clf.predict(to_predict)
 
