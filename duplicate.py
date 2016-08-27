@@ -77,7 +77,7 @@ def convert(question_key_pairs, vector):
 training_data = convert(training_pairs, tfidf_vector)
 to_predict = convert(testing_data, tfidf_vector)
 
-clf = LogisticRegression(C=1.0)
+clf = LogisticRegression(C=0.0001, dual=True)
 clf = clf.fit(training_data, training_labels)
 answers = clf.predict(to_predict)
 
